@@ -86,7 +86,17 @@ $(document).ready(function() {
             trivia.timer = 20;
             $("#timer").text(trivia.timer);
 
-            
+            // Get the question value from the object and display to DOM
+            var question = Object.values(trivia.questions)[trivia.currentSet];
+            $("#triviaQuestion").text(question);
+
+            // Grab the array of all possible answers for the chosen answer and generate to the DOM
+            var questionOptions = Object.values(trivia.options)[trivia.currentSet];
+            $.each(questionOptions, function(key) {
+                $("options").append("<button>" + key + "</button>");
+            });
+
+
         },
 
         checkGuess: function() {
