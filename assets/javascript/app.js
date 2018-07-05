@@ -59,6 +59,7 @@ function decrementTimer() {
     if (timer === 0) {
         unAnswered++;
         stopTimer();
+        $("#gameSection").html("<p>Time's up! The answer is :" + triviaChoices.choices[triviaChoices.answer]);
     }    
     
 }
@@ -67,7 +68,6 @@ function decrementTimer() {
 function stopTimer() {
    running = false;
    clearInterval(intervalId);
-   $("#gameSection").html("<p>Time's up! The answer is :" + )
 }
 
 // Displays a new question onto the DOM
@@ -87,11 +87,6 @@ function askQuestion() {
     }
 }
 
-// Checks if the user's guess is correct
-function checkGuess() {
-
-}
-
 // Displays the correct answer for a few seconds
 function displayAnswer() {
     // Display the correct answer
@@ -107,6 +102,29 @@ $(document).ready(function() {
     $("#reset").hide();
 
     // When user clicks start button, game starts
+    $("#start").on("click", function() {
+
+        askQuestion();
+    });
+
+    // Event listener when player clicks on an answer
+    $(".answerChoice").on("click", function() {
+
+        userGuess = parseInt($(this).attr("data-guess"));
+
+        if (userGuess === triviaChoices.answer) {
+            stopTimer();
+            correct++;
+            userGuess = "";
+            $("#gameSection").html("<h2>Correct!</h2>");
+        } else {
+            stopTimer();
+            incorrect++;
+            userGuess = "";
+            $("#gameSection").html("<h2>Incorrect! The answer was: " + answerChoices.choices[answerChoices.answer] + "</h2>");
+        }
+        
+    });
 
     // When user clicks reset button, reset the game
 
