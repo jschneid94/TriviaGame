@@ -24,6 +24,8 @@ var intervalId;
 var timerOn = false;
 // Variable to store user guess
 var userGuess;
+var chosenQuestion; 
+var index;
 
 // FUNCTIONS
 
@@ -49,28 +51,45 @@ function startTimer() {
 // Decrements the timer
 function decrementTimer() {
     // Display the count on the screen
+    $("#timer").text("<h3>Time Remaining: " + timer + "</h3>");
     // Decrement the timer by 1.
+    timer--;
 
     // If timer reaches zero...
+    if (timer === 0) {
         unAnswered++;
         stopTimer();
-
+    }    
+    
 }
 
 // Stops the timer
 function stopTimer() {
-
+   running = false;
+   clearInterval(intervalId);
+   $("#gameSection").html("<p>Time's up! The answer is :" + )
 }
 
 // Displays a new question onto the DOM
 function askQuestion() {
     // Generate a random question from questions object
+    index = Math.floor(Math.random() * questions.length);
+    chosenQuestion = questions[index];
+
     // Display that object information to the DOM
+    $("#triviaQuestion").html("<h2>" + chosenQuestion.question + "</h2>");
+    for (var i = 0; i < chosenQuestion.choices; i++) {
+        var triviaChoices = $("<div/>");
+        triviaChoices.addClass("answerChoice");
+        triviaChoices.append(chosenQuestion.choices[i]);
+        triviaChoices.attr("data-guess", i);
+        $("#options").append(triviaChoices);
+    }
 }
 
 // Checks if the user's guess is correct
 function checkGuess() {
-    
+
 }
 
 // Displays the correct answer for a few seconds
@@ -85,9 +104,10 @@ function displayAnswer() {
 $(document).ready(function() {
 
     // Only display start game button on to screen
+    $("#reset").hide();
 
     // When user clicks start button, game starts
 
-
+    // When user clicks reset button, reset the game
 
 });
