@@ -25,7 +25,7 @@ var questions = [
       answer: 2,
       photo: "../images/ariamis.gif"
     },
-    { question: "Who are the knights who stayed in the Palace at Anor Londo?",
+    { question: "Who are the knights that stayed in the Palace at Anor Londo?",
       choices: ["Silver Knights", "Knights of Light", "Black Knights", "The Loyalists"],
       answer: 0,
       photo: "../images/silver_knight.gif"
@@ -64,6 +64,8 @@ var answeredQuestionBank = [];
 
 // Starts the interval on the timer
 function startTimer() {
+    $("#timeRemaining").show();
+    $("#gameSection").show();
     if (!timerOn) {
         intervalId = setInterval(decrementTimer, 1000);
         timerOn = true;
@@ -73,7 +75,7 @@ function startTimer() {
 // Decrements the timer
 function decrementTimer() {
     // Display the count on the screen
-    $("#timer").text("<h3>Time Remaining: " + timer + "</h3>");
+    $("#timeRemaining").html("<h3>Time Remaining: " + timer + "</h3>");
     // Decrement the timer by 1.
     timer--;
 
@@ -81,7 +83,7 @@ function decrementTimer() {
     if (timer === 0) {
         unAnswered++;
         stopTimer();
-        $("#gameSection").html("<p>Time's up! The answer is :" + triviaChoices.choices[triviaChoices.answer]);
+        $("#triviaQuestion").html("<p>Time's up! The answer is: " + chosenQuestion.choices[chosenQuestion.answer]);
         displayAnswer();
     }    
     
@@ -101,10 +103,10 @@ function askQuestion() {
 
     // Display that object information to the DOM
     $("#triviaQuestion").html("<h2>" + chosenQuestion.question + "</h2>");
-    for (var i = 0; i < chosenQuestion.choices; i++) {
-        var triviaChoices = $("<div/>");
+    for (var i = 0; i < chosenQuestion.choices.length; i++) {
+        var triviaChoices = $("<div>");
         triviaChoices.addClass("answerChoice");
-        triviaChoices.append(chosenQuestion.choices[i]);
+        triviaChoices.html(chosenQuestion.choices[i]);
         triviaChoices.attr("data-guess", i);
         $("#options").append(triviaChoices);
     }
@@ -112,8 +114,7 @@ function askQuestion() {
 
 // Displays the correct answer for a few seconds
 function displayAnswer() {
-    // Display the correct answer
-        // setTimeout();
+    $("#options").append("<img src='" + chosenQuestion.photo + "'>")
     // Push question index into another array so it won't be chosen again
     answeredQuestionBank.push(chosenQuestion);
     questions.splice(index, 1);
@@ -133,7 +134,7 @@ function displayAnswer() {
             $("#reset").show();
         } else {
             askQuestion();
-            runTimer();
+            startTimer();
         }
 
     }, 3000);
@@ -145,6 +146,7 @@ $(document).ready(function() {
 
     // Only display start game button on to screen
     $("#reset").hide();
+    $("#timeRemaining").hide();
 
     // When user clicks start button, game starts
     $("#start").on("click", function() {
@@ -154,7 +156,6 @@ $(document).ready(function() {
         }
         askQuestion();
         startTimer();
-
     });
 
     // Event listener when player clicks on an answer
@@ -180,6 +181,9 @@ $(document).ready(function() {
 
     // When user clicks reset button, reset the game
     $("#reset").on("click", function() {
+        correct = 0;
+        incorrect = 0;
+        unAnswered = 0;
         $("#start").hide();
         for (var i = 0; i < options.length; i++) {
             questions.push(questionBank[i]);
