@@ -1,15 +1,45 @@
 // Object array for each question and question values
 var questions = [
     { question: "What's the name of the mark which brands those with the undead curse?",
-      choices: ["Dark Brand", "Darksign", "Cursed Brand", "Mark of the Cursed"];
+      choices: ["Dark Brand", "Darksign", "Cursed Brand", "Mark of the Cursed"],
       answer: 1,
       photo: "../images/darksign.gif"
     }, 
-    { question: "",
-      choices: ["", "", "", ""];
-      answer: ,
-
-    }
+    { question: "Who famously betrayed his own kind?",
+      choices: ["Gravelord Nito", "Gwyn, The Lord of Sunlight", "Andre of Astora", "Seath the Scaleless"],
+      answer: 3,
+      photo: "../images/seath.gif"
+    },
+    { question: "What's the name of Gwyn's daughter?",
+      choices: ["Gwynevere", "The Witch of Izalith", "Gwyndolin", "Anastacia"],
+      answer: 0,
+      photo: "../images/gwynevere.gif"
+    },
+    { question: "What is the name of the land in which the game takes place?",
+      choices: ["Londor", "Drangleic", "Lordran", "Anastacia"],
+      answer: 2,
+      photo: "../images/lordran.jpeg"
+    },
+    { question: "Who is the creator of the place known as the 'Painted World'?",
+      choices: ["Gwyn, The Lord of Sunlight", "Solaire", "Ariamis", "Quelaag"],
+      answer: 2,
+      photo: "../images/ariamis.gif"
+    },
+    { question: "Who are the knights who stayed in the Palace at Anor Londo?",
+      choices: ["Silver Knights", "Knights of Light", "Black Knights", "The Loyalists"],
+      answer: 0,
+      photo: "../images/silver_knight.gif"
+    },
+    { question: "Who found the 4th Lord Soul, known as the 'Dark Soul'?",
+      choices: ["Gravelord Nito", "The Witch of Izalith", "Gwyn, The Lord of Sunlight", "Furtive Pygmy"],
+      answer: 3,
+      photo: "../images/furtive_pygmy.gif"
+    },
+    { question: "Who is popularly believed to be a son of Gwyn?",
+      choices: ["Gwyndolin", "Solaire", "Artorias", "Ornstein"],
+      answer: 1,
+      photo: "../images/solaire.gif"
+    },
 ];
 
 // GLOBAL VARIABLES
