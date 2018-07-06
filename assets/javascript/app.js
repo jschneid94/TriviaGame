@@ -1,8 +1,9 @@
 // Object array for each question and question values
 var questions = [
-    { question: "",
-      choices: ["", "", "", ""];
-      answer: ,
+    { question: "What's the name of the mark which brands those with the undead curse?",
+      choices: ["Dark Brand", "Darksign", "Cursed Brand", "Mark of the Cursed"];
+      answer: 1,
+      photo: "../images/darksign.gif"
     }, 
     { question: "",
       choices: ["", "", "", ""];
@@ -26,19 +27,10 @@ var timerOn = false;
 var userGuess;
 var chosenQuestion; 
 var index;
+var questionBank = [];
+var answeredQuestionBank = [];
 
 // FUNCTIONS
-
-// Displays the timer and the question area, hides other sections
-function startGame() {
-    // Show timer
-    // Show question area
-    // Hide start button
-    // run askQuestion
-    askQuestion();
-    // run startTimer
-    startTimer();
-}
 
 // Starts the interval on the timer
 function startTimer() {
@@ -60,13 +52,14 @@ function decrementTimer() {
         unAnswered++;
         stopTimer();
         $("#gameSection").html("<p>Time's up! The answer is :" + triviaChoices.choices[triviaChoices.answer]);
+        displayAnswer();
     }    
     
 }
 
 // Stops the timer
 function stopTimer() {
-   running = false;
+   timerOn = false;
    clearInterval(intervalId);
 }
 
@@ -92,7 +85,29 @@ function displayAnswer() {
     // Display the correct answer
         // setTimeout();
     // Push question index into another array so it won't be chosen again
-    askQuestion();
+    answeredQuestionBank.push(chosenQuestion);
+    questions.splice(index, 1);
+
+    setTimeout( function() {
+
+        $("#options").empty();
+        // Reset timer
+        timer = 20;
+
+        if (correct + incorrect + unAnswered === questions.length) {
+            $("#triviaQuestion").empty();
+            $("#triviaQuestion").html("Game over! Here is how you did:");
+            $("#options").append("<p>Correct answers: " + correct + "</p>");
+            $("#options").append("<p>Incorrect answers: " + incorrect + "</p>");
+            $("#options").append("<p>Unanswered questions: " + unAnswered + "</p>");
+            $("#reset").show();
+        } else {
+            askQuestion();
+            runTimer();
+        }
+
+    }, 3000);
+
 }
 
 // On document ready...
@@ -103,8 +118,13 @@ $(document).ready(function() {
 
     // When user clicks start button, game starts
     $("#start").on("click", function() {
-
+        $("#start").hide();
+        for (var i = 0; i < options.length; i++) {
+            questionBank.push(questions[i]);
+        }
         askQuestion();
+        startTimer();
+
     });
 
     // Event listener when player clicks on an answer
@@ -117,15 +137,25 @@ $(document).ready(function() {
             correct++;
             userGuess = "";
             $("#gameSection").html("<h2>Correct!</h2>");
+            displayAnswer();
         } else {
             stopTimer();
             incorrect++;
             userGuess = "";
             $("#gameSection").html("<h2>Incorrect! The answer was: " + answerChoices.choices[answerChoices.answer] + "</h2>");
+            displayAnswer();
         }
-        
+
     });
 
     // When user clicks reset button, reset the game
+    $("#reset").on("click", function() {
+        $("#start").hide();
+        for (var i = 0; i < options.length; i++) {
+            questions.push(questionBank[i]);
+        }
+        askQuestion();
+        startTimer();
+    });
 
 });
