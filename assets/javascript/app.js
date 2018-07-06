@@ -48,7 +48,7 @@ var correct = 0;
 var incorrect = 0
 var unAnswered = 0;
 // Timer count
-var timer = 20;
+var timer = 10;
 // Variable for setting interval
 var intervalId;
 // Boolean for if timer is on
@@ -72,7 +72,7 @@ function startTimer() {
     }
 }
 
-// Decrements the timer
+// Decrements the timer on the DOM
 function decrementTimer() {
     // Display the count on the screen
     $("#timeRemaining").html("<h3>Time Remaining: " + timer + "</h3>");
@@ -80,7 +80,7 @@ function decrementTimer() {
     timer--;
 
     // If timer reaches zero...
-    if (timer === 0) {
+    if (timer === -1) {
         unAnswered++;
         stopTimer();
         $("#triviaQuestion").html("<p>Time's up! The answer is: " + chosenQuestion.choices[chosenQuestion.answer]);
@@ -114,6 +114,8 @@ function askQuestion() {
 
 // Displays the correct answer for a few seconds
 function displayAnswer() {
+    $("#options").empty();
+    $("#timeRemaining").empty();
     $("#options").append("<img src='" + chosenQuestion.photo + "'>")
     // Push question index into another array so it won't be chosen again
     answeredQuestionBank.push(chosenQuestion);
@@ -123,7 +125,7 @@ function displayAnswer() {
 
         $("#options").empty();
         // Reset timer
-        timer = 20;
+        timer = 10;
 
         if (correct + incorrect + unAnswered === questions.length) {
             $("#triviaQuestion").empty();
@@ -137,7 +139,7 @@ function displayAnswer() {
             startTimer();
         }
 
-    }, 3000);
+    }, 4000);
 
 }
 
@@ -173,7 +175,7 @@ $(document).ready(function() {
             stopTimer();
             incorrect++;
             userGuess = "";
-            $("#gameSection").html("<h2>Incorrect! The answer was: " + answerChoices.choices[answerChoices.answer] + "</h2>");
+            $("#gameSection").html("<h2>Incorrect! The answer was: " + chosenQuestion.choices[chosenQuestion.answer] + "</h2>");
             displayAnswer();
         }
 
@@ -184,6 +186,7 @@ $(document).ready(function() {
         correct = 0;
         incorrect = 0;
         unAnswered = 0;
+        $("#results").empty();
         $("#start").hide();
         for (var i = 0; i < options.length; i++) {
             questions.push(questionBank[i]);
