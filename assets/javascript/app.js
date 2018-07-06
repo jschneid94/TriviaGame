@@ -48,7 +48,7 @@ var correct = 0;
 var incorrect = 0
 var unAnswered = 0;
 // Timer count
-var timer = 10;
+var timer = 3;
 // Variable for setting interval
 var intervalId;
 // Boolean for if timer is on
@@ -59,6 +59,7 @@ var chosenQuestion;
 var index;
 var questionBank = [];
 var answeredQuestionBank = [];
+var questionCount = questions.length
 
 // FUNCTIONS
 
@@ -115,7 +116,7 @@ function askQuestion() {
 // Displays the correct answer for a few seconds
 function displayAnswer() {
     $("#options").empty();
-    $("#timeRemaining").empty();
+    $("#timeRemaining").hide();
     $("#options").append("<img src='" + chosenQuestion.photo + "'>")
     // Push question index into another array so it won't be chosen again
     answeredQuestionBank.push(chosenQuestion);
@@ -125,9 +126,9 @@ function displayAnswer() {
 
         $("#options").empty();
         // Reset timer
-        timer = 10;
+        timer = 3;
 
-        if (correct + incorrect + unAnswered === questions.length) {
+        if (correct + incorrect + unAnswered === questionCount) {
             $("#triviaQuestion").empty();
             $("#triviaQuestion").html("Game over! Here is how you did:");
             $("#options").append("<p>Correct answers: " + correct + "</p>");
@@ -135,8 +136,8 @@ function displayAnswer() {
             $("#options").append("<p>Unanswered questions: " + unAnswered + "</p>");
             $("#reset").show();
         } else {
-            askQuestion();
             startTimer();
+            askQuestion();
         }
 
     }, 4000);
@@ -153,11 +154,11 @@ $(document).ready(function() {
     // When user clicks start button, game starts
     $("#start").on("click", function() {
         $("#start").hide();
-        for (var i = 0; i < options.length; i++) {
+        for (var i = 0; i < questions.length; i++) {
             questionBank.push(questions[i]);
         }
-        askQuestion();
         startTimer();
+        askQuestion();
     });
 
     // Event listener when player clicks on an answer
@@ -186,9 +187,9 @@ $(document).ready(function() {
         correct = 0;
         incorrect = 0;
         unAnswered = 0;
-        $("#results").empty();
+        $("#options").empty();
         $("#start").hide();
-        for (var i = 0; i < options.length; i++) {
+        for (var i = 0; i < questionBank.length; i++) {
             questions.push(questionBank[i]);
         }
         askQuestion();
