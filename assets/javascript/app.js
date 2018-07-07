@@ -107,7 +107,7 @@ function askQuestion() {
     for (var i = 0; i < chosenQuestion.choices.length; i++) {
         var triviaChoices = $("<div>");
         triviaChoices.addClass("answerChoice");
-        triviaChoices.html(chosenQuestion.choices[i]);
+        triviaChoices.html("<h4>" + chosenQuestion.choices[i] + "</h4>");
         triviaChoices.attr("data-guess", i);
         $("#options").append(triviaChoices);
     }
@@ -131,9 +131,9 @@ function displayAnswer() {
         if (correct + incorrect + unAnswered === questionCount) {
             $("#triviaQuestion").empty();
             $("#triviaQuestion").html("Game over! Here is how you did:");
-            $("#options").append("<p>Correct answers: " + correct + "</p>");
-            $("#options").append("<p>Incorrect answers: " + incorrect + "</p>");
-            $("#options").append("<p>Unanswered questions: " + unAnswered + "</p>");
+            $("#options").append("<h4>Correct answers: " + correct + "</h4>");
+            $("#options").append("<h4>Incorrect answers: " + incorrect + "</h4>");
+            $("#options").append("<h4>Unanswered questions: " + unAnswered + "</h4>");
             $("#reset").show();
         } else {
             startTimer();
