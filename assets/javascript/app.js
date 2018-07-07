@@ -162,21 +162,21 @@ $(document).ready(function() {
     });
 
     // Event listener when player clicks on an answer
-    $(".answerChoice").on("click", function() {
+    $("#options").on("click", ".answerChoice", function() {
 
         userGuess = parseInt($(this).attr("data-guess"));
 
-        if (userGuess === triviaChoices.answer) {
+        if (userGuess === chosenQuestion.answer) {
             stopTimer();
             correct++;
             userGuess = "";
-            $("#gameSection").html("<h2>Correct!</h2>");
+            $("#triviaQuestion").html("<h2>Correct!</h2>");
             displayAnswer();
         } else {
             stopTimer();
             incorrect++;
             userGuess = "";
-            $("#gameSection").html("<h2>Incorrect! The answer was: " + chosenQuestion.choices[chosenQuestion.answer] + "</h2>");
+            $("#triviaQuestion").html("<h2>Incorrect! The answer was: " + chosenQuestion.choices[chosenQuestion.answer] + "</h2>");
             displayAnswer();
         }
 
