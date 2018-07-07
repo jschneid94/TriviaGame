@@ -11,10 +11,34 @@ img {
     width: 400px;
 }
 
+h4 {
+    margin: 0;
+}
+
 .container {
     width: 50%;
     margin-top: 50px;
     margin-right: 25px;
+}
+
+.answerChoice {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+}
+
+.answerChoice h4:hover {
+    background-color: #23272B;
+}
+
+#triviaQuestion h4 {
+    padding: 10px 0;
+}
+
+#options h4 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
 }
 
 #start {
