@@ -3,42 +3,42 @@ var questions = [
     { question: "What's the name of the mark which brands those with the undead curse?",
       choices: ["Dark Brand", "Darksign", "Cursed Brand", "Mark of the Cursed"],
       answer: 1,
-      photo: "../images/darksign.gif"
+      photo: "assets/images/darksign.gif"
     }, 
     { question: "Who famously betrayed his own kind?",
       choices: ["Gravelord Nito", "Gwyn, The Lord of Sunlight", "Andre of Astora", "Seath the Scaleless"],
       answer: 3,
-      photo: "../images/seath.gif"
+      photo: "assets/images/seath.gif"
     },
     { question: "What's the name of Gwyn's daughter?",
       choices: ["Gwynevere", "The Witch of Izalith", "Gwyndolin", "Anastacia"],
       answer: 0,
-      photo: "../images/gwynevere.gif"
+      photo: "assets/images/gwynevere.gif"
     },
     { question: "What is the name of the land in which the game takes place?",
       choices: ["Londor", "Drangleic", "Lordran", "Anastacia"],
       answer: 2,
-      photo: "../images/lordran.jpeg"
+      photo: "assets/images/lordran.jpeg"
     },
     { question: "Who is the creator of the place known as the 'Painted World'?",
       choices: ["Gwyn, The Lord of Sunlight", "Solaire", "Ariamis", "Quelaag"],
       answer: 2,
-      photo: "../images/ariamis.gif"
+      photo: "assets/images/ariamis.gif"
     },
     { question: "Who are the knights that stayed in the Palace at Anor Londo?",
       choices: ["Silver Knights", "Knights of Light", "Black Knights", "The Loyalists"],
       answer: 0,
-      photo: "../images/silver_knight.gif"
+      photo: "assets/images/silver_knight.gif"
     },
     { question: "Who found the 4th Lord Soul, known as the 'Dark Soul'?",
       choices: ["Gravelord Nito", "The Witch of Izalith", "Gwyn, The Lord of Sunlight", "Furtive Pygmy"],
       answer: 3,
-      photo: "../images/furtive_pygmy.gif"
+      photo: "assets/images/furtive_pygmy.gif"
     },
     { question: "Who is popularly believed to be a son of Gwyn?",
       choices: ["Gwyndolin", "Solaire", "Artorias", "Ornstein"],
       answer: 1,
-      photo: "../images/solaire.gif"
+      photo: "assets/images/solaire.gif"
     },
 ];
 
@@ -117,7 +117,7 @@ function askQuestion() {
 function displayAnswer() {
     $("#options").empty();
     $("#timeRemaining").hide();
-    $("#options").append("<img src='" + chosenQuestion.photo + "'>")
+    $("#options").append("<img src=" + chosenQuestion.photo + ">");
     // Push question index into another array so it won't be chosen again
     answeredQuestionBank.push(chosenQuestion);
     questions.splice(index, 1);
@@ -140,7 +140,7 @@ function displayAnswer() {
             askQuestion();
         }
 
-    }, 4000);
+    }, 3000);
 
 }
 
@@ -187,13 +187,12 @@ $(document).ready(function() {
         correct = 0;
         incorrect = 0;
         unAnswered = 0;
-        $("#options").empty();
-        $("#start").hide();
+        $("#options, #triviaQuestion").empty();
+        $("#reset").hide();
         for (var i = 0; i < questionBank.length; i++) {
             questions.push(questionBank[i]);
         }
-        askQuestion();
-        startTimer();
+        $("#start").show();
     });
 
 });
