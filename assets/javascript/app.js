@@ -43,17 +43,12 @@ var questions = [
 ];
 
 // GLOBAL VARIABLES
-// Count for correct, incorrect, and unanswered questions
 var correct = 0;
 var incorrect = 0
 var unAnswered = 0;
-// Timer count
-var timer = 3;
-// Variable for setting interval
+var timer = 20;
 var intervalId;
-// Boolean for if timer is on
 var timerOn = false;
-// Variable to store user guess
 var userGuess;
 var chosenQuestion; 
 var index;
@@ -126,7 +121,7 @@ function displayAnswer() {
 
         $("#options").empty();
         // Reset timer
-        timer = 3;
+        timer = 20;
 
         if (correct + incorrect + unAnswered === questionCount) {
             $("#triviaQuestion").empty();
