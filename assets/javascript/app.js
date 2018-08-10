@@ -188,6 +188,7 @@ $(document).ready(function() {
             questions.push(questionBank[i]);
         }
         $("#start").show();
+        $("#gameSection").hide();
     });
 
 });
